@@ -146,8 +146,9 @@ jobs:
     - name: Clone AnyKernel3 and SUSFS Dependencies
       run: |
         git clone https://github.com/ahmedtohamy1/ak3 -b peridot AnyKernel3
-        git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android14-5.15
+        git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android14-6.1
         git clone https://github.com/ShirkNeko/SukiSU_patch.git
+        git clone https://github.com/TheFloresto/kernel_patches -b main
       working-directory: ${{ steps.workspace.outputs.workspace-folder }}
 
     - name: Download toolchain
@@ -193,7 +194,7 @@ jobs:
       if: ${{ github.event.inputs.KERNELSU_OPTION == '2' || github.event.inputs.KERNELSU_OPTION == '4' }}
       run: |
         cd ${{ steps.kernel.outputs.kernel-folder }}
-        cp -v ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-android14-5.15.patch .
+        cp -v ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-android14-6.1.patch .
         cp -v ../susfs4ksu/kernel_patches/fs/* ./fs/
         cp -v ../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
         if [ "${{ github.event.inputs.KERNELSU_OPTION }}" == "2" ]; then
@@ -208,7 +209,7 @@ jobs:
           patch -p1 --forward --fuzz=3 < 69_hide_stuff.patch
         fi
         cd ..
-        patch -p1 --forward --fuzz=3 < 50_add_susfs_in_gki-android14-5.15.patch
+        patch -p1 --forward --fuzz=3 < 50_add_susfs_in_gki-android14-6.1.patch
 
     - name: Add Configuration Settings
       if: ${{ github.event.inputs.KERNELSU_OPTION == '2' || github.event.inputs.KERNELSU_OPTION == '4' }}
@@ -436,7 +437,7 @@ jobs:
     - name: Clone AnyKernel3 and SUSFS Dependencies
       run: |
         git clone https://github.com/ahmedtohamy1/ak3 -b peridot AnyKernel3
-        git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android14-5.15
+        git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-android14-6.1
         git clone https://github.com/ShirkNeko/SukiSU_patch.git
       working-directory: ${{ steps.workspace.outputs.workspace-folder }}
 
@@ -477,7 +478,7 @@ jobs:
       if: ${{ github.event.inputs.KERNELSU_OPTION == '2' || github.event.inputs.KERNELSU_OPTION == '4' }}
       run: |
         cd ${{ steps.kernel.outputs.kernel-folder }}
-        cp -v ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-android14-5.15.patch .
+        cp -v ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-android14-6.1.patch .
         cp -v ../susfs4ksu/kernel_patches/fs/* ./fs/
         cp -v ../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
         if [ "${{ github.event.inputs.KERNELSU_OPTION }}" == "2" ]; then
@@ -492,7 +493,7 @@ jobs:
           patch -p1 --forward --fuzz=3 < 69_hide_stuff.patch
         fi
         cd ..
-        patch -p1 --forward --fuzz=3 < 50_add_susfs_in_gki-android14-5.15.patch
+        patch -p1 --forward --fuzz=3 < 50_add_susfs_in_gki-android14-6.1.patch
 
     - name: Add Configuration Settings
       if: ${{ github.event.inputs.KERNELSU_OPTION == '2' || github.event.inputs.KERNELSU_OPTION == '4' }}
